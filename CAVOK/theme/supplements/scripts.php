@@ -1,0 +1,16 @@
+<script type="text/javascript" src="<?php echo JS_LIB; ?>jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="<?php echo JS_LIB; ?>jquery-migrate-1.1.1.min.js"></script>
+<script type="text/javascript" src="<?php echo JS_LIB; ?>jquery-ui-1.9.2.min.js"></script>
+<script type="text/javascript" src="<?php echo JS_LIB; ?>modernizr.min.js"></script>
+<script type="text/javascript" src="<?php echo JS_LIB; ?>bootstrap.min.js"></script>
+<script type="text/javascript" src="<?php echo JS_LIB; ?>jquery.cookie.js"></script>
+<script type="text/javascript" src="<?php echo JS_LIB; ?>jquery.uniform.min.js"></script>
+<script type="text/javascript" src="<?php echo JS_LIB; ?>flot/jquery.flot.min.js"></script>
+<script type="text/javascript" src="<?php echo JS_LIB; ?>flot/jquery.flot.resize.min.js"></script>
+<script type="text/javascript" src="<?php echo JS_LIB; ?>responsive-tables.js"></script>
+<script type="text/javascript" src="<?php echo JS_LIB; ?>custom.js"></script>
+<script type="text/javascript" src="<?php echo JS_LIB; ?>jquery.alerts.js"></script>
+<script type="text/javascript" src="<?php echo PUB_PATH; ?>prettify/prettify.js"></script>
+<script type="text/javascript" src="<?php echo PUB_PATH; ?>js-leg/jquery-mask-min.js"></script>
+<script type="text/javascript" src="<?php echo JS_LIB; ?>jquery.smartWizard.min.js"></script>
+<script type="text/javascript" src="<?php echo JS_LIB; ?>elements.js"></script>
