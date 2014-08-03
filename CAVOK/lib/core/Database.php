@@ -8,10 +8,10 @@ class Database extends PDO {
 
     function __construct() {
      
-        $host = 'localhost';
-        $username = 'pnet423_cavok';
-        $dbname = 'pnet423_cavok_fos';
-        $passwd = 'halovilag2';
+        $host = C_HOST;
+        $username = C_NAME;
+        $dbname = C_USER;
+        $passwd = C_LOG;
         $options = array();
         $dsn = 'mysql:host='.$host.';dbname='.$dbname;
         

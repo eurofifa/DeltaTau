@@ -18,3 +18,8 @@ define('FORCE_SSL', FALSE);
 //REMOVE ARGUMENT FOR PROPER WORK
 define('HTTP_DIR', '');
 
+//DATABASE SETTINGS
+define('C_HOST', 'localhost');
+define('C_NAME', 'pnet423_cavok');
+define('C_USER', 'pnet423_cavok_fos');
+define('C_LOG', 'halovilag2');
