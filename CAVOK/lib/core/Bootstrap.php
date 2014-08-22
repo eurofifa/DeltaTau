@@ -19,9 +19,10 @@ class BootStrap {
       */
      function __construct() {  
         $this->_getURL();   
-        if (empty($this->_url[0])) { Session::init();
-            if(Session::get('lIN')){ $this->_loadExistingController('home'); $this->_callControllerMethod(); return false;
-            }else{ unset($_SESSION); Session::destroy(); $this->_loadDefaultController(); return false; }
+        if (empty($this->_url[0])) { 
+            Session::init();
+            $this->_loadDefaultController();
+            return false;
         }
         $this->_loadExistingController($this->_url[0]);
         $this->_callControllerMethod();
@@ -30,11 +31,16 @@ class BootStrap {
     /**
      * Loads the default controller upon blank request
      */
-    private function _loadDefaultController(){
-            require_once CNT_PATH.'login/login.php';
-            $controller = new login();
-            $controller->loadModel('login');
-            $controller->index();
+    private function _loadDefaultController(){ 
+            if(Session::is_logged()){ 
+                 $this->_loadExistingController('home');
+                 $this->_callControllerMethod(); 
+            }else{ 
+                unset($_SESSION);
+                Session::destroy();
+                $this->_loadExistingController('login');
+                $this->_callControllerMethod(); 
+            }
     }
 
     /**

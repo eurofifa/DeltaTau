@@ -25,6 +25,11 @@ class Session {
         }          
     }
     
+    public static function is_logged(){ 
+        if(self::get('lIN')){ return true; }
+        return false;
+    }
+    
     public static function destroy(){
         session_destroy();
     }

@@ -1,9 +1,12 @@
 <?php
 /**
- * DeltaTau Project
+ * DeltaTau Project | Boot
  * @author Gabor B Magyari
+ * @version 0.4.0
  * 
- * Auto Load Core
+ * @package DeltaTau Project
+ * 
+ * This project utilizes very basic OOP programing methods to render simple forms for small and quick projects.
  * 
  */
 class boot {
@@ -18,7 +21,6 @@ class boot {
     
     /**
      * Set General State
-     * 
      * @author MagoR
      * @note sets general state such as "DEVELOPER" for error reporting and such.
      */
@@ -37,7 +39,6 @@ class boot {
 
     /**
      * Loads Core Files
-     * 
      * @author MagoR
      * @note auto load all files from CORE
      */
@@ -49,7 +50,6 @@ class boot {
     
     /**
      * Loads mCore Files
-     * 
      * @author MagoR
      * @note auto load all files from mCore
      */
@@ -61,7 +61,6 @@ class boot {
     
     /**
      * Update Registry
-     * 
      * @author MagoR
      * @note update components list in db registry
     */
@@ -85,12 +84,10 @@ class boot {
         }
         ACL::set('sadmin', array('type' => 'components', 'allow' => $list));
         ACL::set('sadmin', array('type' => 'extended', 'allow' => $list));
-        //DB::update(array('tablename' => 'usergroups','write' => false,'condition' => 'and','custom' => 'usergroup = :usergroup','items' => array(':usergroup' => 'sadmin',':components' => serialize($list), ':extended' => serialize($list))));
     }
     
     /**
      * Initialize Bootstrap
-     * 
      * @author MagoR
      */
     private function _autoLaunch(){ 
