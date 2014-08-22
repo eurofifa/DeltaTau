@@ -1,13 +1,14 @@
 <?php
 /**
+ * DeltaTau Project | Session
+ * @author Gabor B Magyari
+ * @version 0.4.0
  * 
- * DeltaTau Project
+ * @package DeltaTau Project
  * 
- * @author MagoR
+ * This project utilizes very basic OOP programing methods to render simple forms for small and quick projects.
  * 
- * @note default Session Handler (static)
- * 
-*/
+ */
 class Session {
 
     public static function init(){
@@ -25,7 +26,6 @@ class Session {
     }
     
     public static function destroy(){
-        //unset($_SESSION);
         session_destroy();
     }
 

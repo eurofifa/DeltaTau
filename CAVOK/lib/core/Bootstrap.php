@@ -16,7 +16,6 @@ class BootStrap {
    
      /**
       * Constructs Bootsrap with predefined params
-      * @todo Integrate predefined parameters
       */
      function __construct() {  
         $this->_getURL();   
