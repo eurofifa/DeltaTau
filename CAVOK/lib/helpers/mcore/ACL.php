@@ -37,7 +37,7 @@ class ACL  {
      * )
      * 
      */
-    public static function set($usergroup, $rights = array('type' => 'components', 'allow' => array('login', 'log'))){ 
+    public static function set($usergroup, $rights = array('type' => 'components', 'allow' => array('login', 'home'))){ 
         DB::update(array(
             'tablename' => 'usergroups',
             'write' => false,
@@ -80,16 +80,17 @@ class ACL  {
      * @param bool $extended true if extended 
      */
     public static function get($usergroup, $extended = false){ 
-        if($extended){ $type = 'extended'; }else{ $type = 'components'; }
+        if ($extended) { $type = 'extended'; } else { $type = 'components'; }
         $rights = DB::get_one(array(
-            'tablename' => 'usergroups',
-            'select' => $type,
-            'condition' => 'and',
-            'items' => array(
-                ':usergroup' => $usergroup
-            )
+                    'tablename' => 'usergroups',
+                    'select' => $type,
+                    'condition' => 'and',
+                    'items' => array(
+                        ':usergroup' => $usergroup
+                    )
         ));
-        return unserialize($rights[$type]);
+        if (isset($rights[$type])) { return unserialize($rights[$type]);}
+        return false;
     }
     
     /**
