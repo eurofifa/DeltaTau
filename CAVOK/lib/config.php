@@ -2,7 +2,7 @@
 /**
  * DeltaTau Project | Configuration
  * @author Gabor B Magyari
- * @version 0.1
+ * @version 0.4.0
  * 
  * @package DeltaTau Project
  * 
@@ -12,7 +12,7 @@
 
 define('SITE_NAME', 'CAVOK Online Journey Log');
 
-//
+//SYSTEM SETTINGS
 define('DEVELOPER', TRUE);
 define('FORCE_SSL', FALSE);
 //REMOVE ARGUMENT FOR PROPER WORK

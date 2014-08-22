@@ -1,5 +1,14 @@
 <?php
-
+/**
+ * DeltaTau Project | Bootstrap
+ * @author Gabor B Magyari
+ * @version 0.4.0
+ * 
+ * @package DeltaTau Project
+ * 
+ * This project utilizes very basic OOP programing methods to render simple forms for small and quick projects.
+ * 
+ */
 class BootStrap {
     
     private $_url = null;
@@ -9,31 +18,16 @@ class BootStrap {
       * Constructs Bootsrap with predefined params
       * @todo Integrate predefined parameters
       */
-     function __construct() {
-        
-        $this->_getURL();
-        
-        if (empty($this->_url[0])) {
-            
-            Session::init();
-            if(Session::get('lIN')){
-              $this->_loadExistingController('home');
-              $this->_callControllerMethod();
-              return false;
-            }else{
-                unset($_SESSION);
-                Session::destroy();
-                $this->_loadDefaultController();
-                return false;
-            }
+     function __construct() {  
+        $this->_getURL();   
+        if (empty($this->_url[0])) { Session::init();
+            if(Session::get('lIN')){ $this->_loadExistingController('home'); $this->_callControllerMethod(); return false;
+            }else{ unset($_SESSION); Session::destroy(); $this->_loadDefaultController(); return false; }
         }
-
         $this->_loadExistingController($this->_url[0]);
-
         $this->_callControllerMethod();
       }
-      
-      
+          
     /**
      * Loads the default controller upon blank request
      */
@@ -42,9 +36,8 @@ class BootStrap {
             $controller = new login();
             $controller->loadModel('login');
             $controller->index();
-        
     }
-    
+
     /**
      * Loads the requested controller
      * @param sets the requested controller $controller
@@ -87,54 +80,26 @@ class BootStrap {
       * url[4] = Param#3
       * 
       */
-     private function _callControllerMethod(){
-            
-         $lenght = count($this->_url);
-         
-         if($lenght > 1){
-             if(!method_exists($this->_controller, $this->_url[1])){
-                $this->_controller->index();
-                return false;
-                //die('heywire');
-              }
-         }
-         
-         switch ($lenght){
-             
-             case 5:
-                 $this->_controller->{$this->_url[1]}($this->_url[2],$this->_url[3],$this->_url[4]);
-                 break;
-             
-             case 4:
-                 $this->_controller->{$this->_url[1]}($this->_url[2],$this->_url[3]);
-                 break;
-             
-             case 3:
-                 $this->_controller->{$this->_url[1]}($this->_url[2]);
-                 break;
-             
-             case 2:
-                 $this->_controller->{$this->_url[1]}();
-                 break;
-             
-             default:
-                 $this->_controller->index();
-                 break;
-                   
-         }
-         
+     private function _callControllerMethod(){ 
+         $lenght = count($this->_url);  
+         if($lenght > 1){ if(!method_exists($this->_controller, $this->_url[1])){ $this->_controller->index(); return false; }} 
+         switch ($lenght){  
+             case 5: $this->_controller->{$this->_url[1]}($this->_url[2],$this->_url[3],$this->_url[4]); break;
+             case 4: $this->_controller->{$this->_url[1]}($this->_url[2],$this->_url[3]); break;
+             case 3: $this->_controller->{$this->_url[1]}($this->_url[2]); break;
+             case 2: $this->_controller->{$this->_url[1]}(); break;
+             default: $this->_controller->index(); break;
+          }   
      }
      
      /**
       * Parse $_GET from requested URL
       */
      private function _getURL(){
-        #ANALYSE REQUEST
         $url = isset($_GET['url']) ? $_GET['url'] : null;
         $url = rtrim($url, '/');
         $url = filter_var($url, FILTER_SANITIZE_URL);
         $this->_url = explode('/', $url);
-        //var_dump($url);
      }
     
 }

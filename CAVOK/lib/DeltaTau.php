@@ -2,7 +2,7 @@
 /**
  * DeltaTau Project
  * @author Gabor B Magyari
- * @version 0.1
+ * @version 0.4.0
  * 
  * @package DeltaTau Project
  * 
