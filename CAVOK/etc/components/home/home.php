@@ -7,8 +7,12 @@ class home extends Controller {
     }
     
     function index(){ 
-        $msg = $this->model->msg();
-        $this->view->__set('test', $msg);
+        $this->view->setPlaces(array(
+        'title' => 'Welcome',
+        'subtitle' => 'CAVOK Online Journey Log',
+        'breadcrumb' => 'Home Page',
+        'logo' => 'iconfa-pencil'
+        ));
         $this->view->render();
     }
 

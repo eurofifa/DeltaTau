@@ -19,28 +19,30 @@ class View {
      * 
      * @note renders HTML output as requested
     */
-    public function render($name = false, $wrap = true){
+    public function render($name = false, $wrap = true, $reroute = false){
         $res = $this->_req;
         if(!$name){ $name = $this->_locateTemplate(mCore::get_calling_class(), mCore::get_calling_method());  }
         if($wrap == true){
             $this->_renderHeader();
             require VIW_PATH.'header.php';
-            require_once VIW_PATH.$name.'.php';
+            require_once APP_PATH.$name.'.php';
             require VIW_PATH.'footer.php';
         }else{ 
-            require_once VIW_PATH.$name.'.php';
+            if($reroute == true){ require_once VIW_PATH.$name.'.php'; }else{ require_once APP_PATH.$name.'.php'; }   
         }
     }
     
     /**
      * Define Template location
+     * @param string $caller provide component name
+     * @param string $method provide component method
      * @return string
      */
     private function _locateTemplate($caller, $method){ 
         if($method !== 'index'){ 
-            return 'pages/' . $caller . '/' . $method;
+            return $caller . '/view/' . $method;
         }else{ 
-            return 'pages/'. $caller . '/' .  $caller;
+            return $caller . '/view/' .  $caller;
         }
     }
     
@@ -108,6 +110,36 @@ class View {
     private function _loadjQ(){ 
         return '<script type="text/javascript" src="https://code.jquery.com/jquery-1.10.2.min.js"></script>'."\n";  
     }
+    
+    /**
+     * Set Places for supported Components
+     * 
+     * There are headers might be individually set for different pages / views.  
+     * Ones serve as titles, subtitles or breadcrumbs for better understanding 
+     * and orientation.
+     * 
+     * Supported format:
+     * -----------------
+     * 
+     * $items = array( 
+     *  'title' => '',
+     *  'subtitle' => '',
+     *  'breadcrumb' => '',
+     *  'logo' => ''
+     * );
+     * 
+     * If designated view so supports, custom place could be set.
+     * 
+     * @param array $items associative as described
+     * 
+     */
+    public function setPlaces($items){    
+       foreach ($items as $key => $value){ 
+           $this->_req['places'][$key] = $value;
+       }   
+    }
+    
+    
     
    /**
      * Set Require Paramater

@@ -195,7 +195,7 @@
      <div class="rightpanel">
         
         <ul class="breadcrumbs">
-            <li><?php echo $res['place']['breadcrumb']; ?></li>
+            <li><?php echo $res['places']['breadcrumb']; ?></li>
             
             <li class="right">
                 <a href="/" class="dropdown-toggle"><i class="iconfa-calendar"></i> <?php echo SYS_DATE; ?></a>
@@ -203,10 +203,10 @@
         </ul>
         
         <div class="pageheader">
-            <div class="pageicon"><span class="iconfa-pencil"></span></div>
+            <div class="pageicon"><span class="<?php echo $res['places']['logo']; ?>"></span></div>
             <div class="pagetitle">
-                <h5><?php echo $res['place']['smallindex']; ?></h5>
-                <h1><?php echo $res['place']['title']; ?></h1>
+                <h5><?php echo $res['places']['subtitle']; ?></h5>
+                <h1><?php echo $res['places']['title']; ?></h1>
             </div>
         </div><!--pageheader-->
         
