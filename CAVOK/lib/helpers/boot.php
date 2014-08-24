@@ -15,6 +15,7 @@ class boot {
         $this->_setState();
         $this->_autoLoad();
         $this->_load_mCore();
+        $this->_load_Drivers();
         $this->_updateRegistry();
         $this->_autoLaunch();
     }
@@ -59,6 +60,17 @@ class boot {
         }
     }
     
+   /**
+     * Loads Drivers
+     * @author MagoR
+     * @note auto load all Drivers
+     */
+    private function _load_Drivers(){ 
+        foreach (glob(LIB_PATH."drivers/*.php") as $filename){
+            include $filename;
+        }
+    }
+    
     /**
      * Update Registry
      * @author MagoR
@@ -92,6 +104,13 @@ class boot {
      */
     private function _autoLaunch(){ 
         global $app;
+        global $state;
+        try {
         $app = new BootStrap();
+        } catch (Exception $e){ 
+            print "The system is currently down.";
+            if($state == true){ print "</br>Error " . $e->getCode() . " : " . $e->getMessage() . "<br/>";   }
+            die();  
+        }
     }
 }

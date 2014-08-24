@@ -1,10 +1,12 @@
 <?php
 /**
- * mCore
- * @version 0.1
- * @author MagoR
+ * DeltaTau Project | mCore
+ * @author Gabor B Magyari
+ * @version 0.4.0
  * 
- * General Core material. Expansion for MVC core classes.
+ * @package DeltaTau Project
+ * 
+ * This project utilizes very basic OOP programing methods to render simple forms for small and quick projects.
  * 
  */
 class mCore {
@@ -85,7 +87,7 @@ class mCore {
     }
     
     /**
-     * TableIzer v1.2 
+     * TableIzer v1.4 
      * 
      * @author: MagoR
      * 
@@ -94,21 +96,23 @@ class mCore {
      * @param $link bool
      * @return string table body
      * 
-     * @example mCore::tableIzer($data,array(array(1,3,4,5),array('Name', 'Stuff 1', 'Stuff 2')),false);
+     * @example mCore::tableIzer($data,array(array(1,3,4,5),array('Name', 'Stuff 1', 'Stuff 2'),'class="example"'),false);
      * 
      * @note expects raw query results and number of columns to show
      * @note then generates table.body for HTML output
      * @note $link parameter accepts base URLs for edit link generation
-     * @note place result between <table> tags!
-     *
-     * @done custom table.header generation
-     * @todo full table generation
+     * @note $setup[2] parameter accepts custom tags for the generated table
+     * @note $setup[1] or $setup[2] might be omitted
      * 
     */
     public static function tableIzer($arg,$setup,$link = false){     
         
         $cols = $setup[0];
-        $heads = $setup[1];
+        $heads = isset($setup[1]) ? $setup[1] : false;
+        $tag = isset($setup[2]) ? $setup[2] : false;
+        $result = '<table>';
+        
+        if($tag){ $result = '<table ' . $tag . '>'; }
         
         if($heads){
             $result .= '<thead><tr>';
@@ -143,11 +147,8 @@ class mCore {
         }
         
         $result .= '</tbody>';
+        $result .= '</table>';
         
         return $result;
     }
-    
-    
-
 }
-

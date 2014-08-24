@@ -28,6 +28,14 @@ class Controller {
             $this->model = new $modelName;   
         }
     }
+    
+    /**
+     * Report an Error
+     * @param string $code Code of the error
+     * @param string $message Message as desrciption
+     */
+    public function error($code, $message){ 
+        throw new Exception($message, $code);
+    }
 
 }
-

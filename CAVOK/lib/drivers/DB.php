@@ -1,9 +1,14 @@
 <?php
 /**
- * DeltaTau Project mCore DataBase Conduit
+ * DeltaTau Project | PDO DB Driver
+ * @author Gabor B Magyari
+ * @version 0.4.0
  * 
- * @author MagoR
-*/
+ * @package DeltaTau Project
+ * 
+ * This project utilizes very basic OOP programing methods to render simple forms for small and quick projects.
+ * 
+ */
 class DB  {
 
     private static $db;
@@ -175,4 +180,3 @@ class DB  {
     } 
     
 }
-

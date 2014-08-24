@@ -29,5 +29,12 @@ class Error extends Controller {
             return false;
         }
     }
+    
+    /**
+     * Throw Exception
+     */
+    public function code($message, $code){ 
+        throw new Exception($message, $code);
+    }
 
 }

@@ -18,7 +18,7 @@ class BootStrap {
       * Constructs Bootsrap with predefined params
       */
      function __construct() {  
-        $this->_getURL();   
+        $this->_getURL();
         if (empty($this->_url[0])) { 
             Session::init();
             $this->_loadDefaultController();
