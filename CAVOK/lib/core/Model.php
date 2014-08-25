@@ -74,7 +74,7 @@ class Model {
         $condition = false;
         if(isset($ID) && $ID !== false){ $items = array(':ID' => $ID); $condition = 'and'; }
         if($PID){ $items = array(':PID' => $PID); $condition = 'and'; }
-        $res = DB::get_one(array('tablename' => 'users','select' => '*','condition' => $condition,'custom' => false,'items' => array(':ID' => $ID)));
+        $res = DB::get_one(array('tablename' => 'flight_log','select' => '*','condition' => $condition,'custom' => false,'items' => array(':ID' => $ID)));
         return $res;
     }
     
@@ -88,7 +88,7 @@ class Model {
         $condition = false;
         if(isset($ID) && $ID !== false){ $items = array(':ID' => $ID); $condition = 'and'; }
         if($PID){ $items = array(':PID' => $PID); $condition = 'and'; }
-        $res = DB::get_one(array('tablename' => 'users','select' => '*','condition' => $condition,'custom' => false,'items' => array(':ID' => $ID)));
+        $res = DB::get_one(array('tablename' => 'usergroups','select' => '*','condition' => $condition,'custom' => false,'items' => array(':ID' => $ID)));
         return $res;
     }
     
@@ -102,7 +102,7 @@ class Model {
         $condition = false;
         if(isset($ID) && $ID !== false){ $items = array(':ID' => $ID); $condition = 'and'; }
         if($PID){ $items = array(':PID' => $PID); $condition = 'and'; }
-        $res = DB::get_one(array('tablename' => 'users','select' => '*','condition' => $condition,'custom' => false,'items' => array(':ID' => $ID)));
+        $res = DB::get_one(array('tablename' => 'trainings','select' => '*','condition' => $condition,'custom' => false,'items' => array(':ID' => $ID)));
         return $res;
     }
     

@@ -24,9 +24,25 @@ class system extends Controller {
      */
     function users(){ 
         
+        $set =$this->model->list_users();
+        $this->view->__set('res' , $set);
         
+        $set =$this->model->list_pilots();
+        $this->view->__set('pilots' , $set);
         
-        $this->view->render();
+        $set =$this->model->list_aircrafts();
+        $this->view->__set('acs' , $set);
+        
+        $set =$this->model->list_usergroups();
+        $this->view->__set('ug' , $set);
+        
+        $set =$this->model->list_flights();
+        $this->view->__set('flights' , $set);
+        
+        $set =$this->model->list_trainings();
+        $this->view->__set('trainings' , $set);
+        
+        $this->view->render('system/view/system');
         
     }
     
