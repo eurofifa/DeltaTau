@@ -29,6 +29,13 @@ class system_Model extends Model {
         return $result;  
     }
     
+    public function rec_user(){
+        $arg = array('testelek', '12345');
+        $update = array('test', '54321');
+        $this->rec_users($arg, $update);
+    }
+    
+    
     /**
      * List all aircrafts users
      */

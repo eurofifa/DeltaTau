@@ -2,7 +2,7 @@
 /**
  * DeltaTau Project | View
  * @author Gabor B Magyari
- * @version 0.4.0
+ * @version 0.5.0
  * 
  * @package DeltaTau Project
  * 
@@ -55,14 +55,19 @@ class View {
      */
     private function _renderHeader(){  
         $result = "<!DOCTYPE html>\n<html>\n<head>\n";
-        $result .= '<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />'."\n".'<meta name="viewport" content="width=device-width, initial-scale=1.0" />'."\n";
-        $result .= mCore::get_rendered(VIW_PATH.'supplements/metas.php');
+        $result .= mCore::get_rendered(THEME_PATH.'supplements/head.php');
+        $result .= mCore::get_rendered(THEME_PATH.'supplements/metas.php');
+        $result .= mCore::get_rendered(THEME_PATH.'supplements/styles.php');
+        $result .= mCore::get_rendered(THEME_PATH.'supplements/scripts.php');
         print $result;        
         print $this->_setTitle();
-        print $this->_loadStyles();
+        //print $this->_loadStyles();
         //print $this->_loadjQ();
-        print $this->_loadJS();     
-        print "</head>\n<body>\n";
+        //print $this->_loadJS();     
+        print "</head>\n<body class=\"theme-satgreen\">\n";
+        $result = mCore::get_rendered(THEME_PATH.'supplements/navigation-vertical.php');
+        $result .= mCore::get_rendered(THEME_PATH.'supplements/navigation-horizontal.php');
+        print $result;
     }
     
     /**

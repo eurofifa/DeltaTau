@@ -2,7 +2,7 @@
 /**
  * DeltaTau Project | Configuration
  * @author Gabor B Magyari
- * @version 0.4.0
+ * @version 0.5.0
  * 
  * @package DeltaTau Project
  * 
@@ -17,6 +17,9 @@ define('DEVELOPER', TRUE);
 define('FORCE_SSL', FALSE);
 //REMOVE ARGUMENT FOR PROPER WORK
 define('HTTP_DIR', '');
+
+//SELECTED THEME
+define('THEME_NAME', 'flat');
 
 //DATABASE SETTINGS
 define('C_HOST', 'localhost');

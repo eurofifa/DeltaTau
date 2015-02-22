@@ -46,6 +46,10 @@ class system extends Controller {
         
     }
     
+    function rec(){  
+        $this->model->rec_user();
+        $this->view->render('home/view/home');
+    }
     
     
     

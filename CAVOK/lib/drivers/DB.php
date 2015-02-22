@@ -2,7 +2,7 @@
 /**
  * DeltaTau Project | PDO DB Driver
  * @author Gabor B Magyari
- * @version 0.4.0
+ * @version 0.5.0
  * 
  * @package DeltaTau Project
  * 
@@ -69,14 +69,12 @@ class DB  {
      *      )
      * );
      * 
-     * @return array associative
-     * 
     */
     public static function update($items, $write = false, $update = false){ 
+        $write = isset($items['write']) ? $items['write'] : $write;
         if(DB::_checkItemExists($items) > 0 && $write == false){ 
             $query = DB::_updateTable($items);
-        }elseif($update == true){ 
-            $query = DB::_updateTable($items);
+        }elseif($update == true){ $query = DB::_updateTable($items);
         }else{ 
             $query = DB::_insertInto($items);
         }
@@ -90,6 +88,7 @@ class DB  {
      * @return boolean
      */
     private static function _checkItemExists($items){ 
+        if(isset($items['check'])){ $items['items'] = $items['check']; }
         $query = "SELECT EXISTS(SELECT 1 FROM ".$items['tablename']." WHERE ";
         foreach ($items['items'] as $key => $value){  
                 $pre = str_replace(':', '', $key);

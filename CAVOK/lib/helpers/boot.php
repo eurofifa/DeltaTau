@@ -36,6 +36,9 @@ class boot {
         define('PUB_PATH', HTTP_PATH . 'theme/');
         define('CSS_LIB', PUB_PATH . 'css/');
         define('JS_LIB', PUB_PATH . 'js/');
+        //DEFINE ROUTES
+        define('THEME_PATH', VIW_PATH . THEME_NAME .'/');
+        define('THEME_HTTP' , HTTP_PATH . 'theme/'. THEME_NAME .'/');
     }
 
     /**
