@@ -469,6 +469,10 @@
 
 					&:hover{
 						background: $light;
+
+						.caret{
+							border-top-color:#333;
+						}
 					}
 				}
 			}
@@ -477,6 +481,10 @@
 				&>a{
 					background:darken($blue, 10%);
 					text-decoration:none;
+
+					.caret{
+						border-top-color: #fff;
+					}
 				}
 
 				&.active{
@@ -511,10 +519,14 @@
 				&:hover{
 					text-decoration:none;
 					background:darken($blue, 10%);
+
+					.caret{
+						border-top-color: #fff;
+					}
 				}
 
 				.caret{
-					border-top-color:#fff;
+					border-top-color:#ccc;
 				}
 			}
 		}

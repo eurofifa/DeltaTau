@@ -12,8 +12,41 @@ class pilot extends Controller {
     }
     
     function index(){ 
-        $this->view->render(false,false);
+        $this->view->setPlaces(array(
+        'title' => 'Pilot Records',
+        'subtitle' => 'Pilot Information',
+        'breadcrumb' => 'Pilot Records',
+        'logo' => 'iconfa-pencil'
+        ));
+        
+        $set =$this->model->get_pilot();
+        $this->view->__set('pilot' , $set);
+        
+        $this->view->render('pilot/view/pilot');
     }
+    
+    function edit(){ 
+        $this->view->setPlaces(array(
+        'title' => 'Edit Pilot Records',
+        'subtitle' => 'Edit Pilot Information',
+        'breadcrumb' => 'Edit Pilot Records',
+        'logo' => 'iconfa-pencil'
+        ));
+        
+        $set =$this->model->pilot_profile();
+        $this->view->__set('pilot' , $set);
+        
+        $this->view->render('pilot/view/edit.pilot');
+    }
+    
+    function flights(){ 
+        
+    }
+    
+    function pw(){ 
+        
+    }
+    
     
 }
 

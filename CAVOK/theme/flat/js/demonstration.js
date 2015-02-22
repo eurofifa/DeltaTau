@@ -1,4 +1,4 @@
-// FLAT Theme v2.0
+// FLAT Theme v2.2
 
 var onlineUserArray = [255, 455, 385, 759, 500, 284, 581, 684, 255, 455, 385, 759, 500, 293, 585, 342, 684];
 
@@ -1173,19 +1173,6 @@ $(document).ready(function() {
             direction: 'bottom'
         }]
     };
-    if ((location.pathname == "/flat/" || location.pathname == '/flat' || location.pathname == '/flat/index.html') && location.host != "localhost" && $(window).width() > 767) {
-        bootbox.animate(false);
-
-        bootbox.confirm("Would you like to start the page guide? It will show you functions you could miss!", "No", "Yes", function(r) {
-            if (r) $.pageguide(guide, {
-                events: {
-                    close: function() {
-                        $.pageguide('unload');
-                    }
-                }
-            }).open();
-        });
-    }
 
     if ($("#sico").length > 0) {
         function formatIcons(option) {

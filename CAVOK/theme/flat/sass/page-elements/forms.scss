@@ -1,5 +1,17 @@
+.input-group-btn{
+	.btn{
+		height: 34px;
+		border: 1px solid #ccc;
+	}
+
+}
+
 .input-medium{
 	width:150px !important;
+}
+
+.input-xlarge{
+	width: 250px !important;
 }
 
 .control-label{
@@ -31,7 +43,7 @@
 			line-height:20px;
 			padding:4px 6px;
 			margin-bottom:0;
-			width:160px;
+			width:150px;
 			outline:none;
 
 			&:focus{

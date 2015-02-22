@@ -1,11 +1,11 @@
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300);
 @import "compass";
 
+// Glyphicon
+@import "glyphicons.scss";
+
 // FontAwesome
 @import "font-awesome/font-awesome.scss";
-
-// Glyphicons
-@import "glyphicons.scss";
 
 // Colors
 @import "colors.scss";
@@ -82,6 +82,16 @@ html,body{
 
 label.inline{
 	font-weight:normal;
+}
+
+#jqstooltip{
+	box-sizing: content-box;
+}
+
+#new-task{
+	.checkbox{
+		padding-left: 20px;
+	}
 }
 
 // BS 3.x has no builtin dropdown-submenu anymore

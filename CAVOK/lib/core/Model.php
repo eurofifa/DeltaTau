@@ -67,13 +67,14 @@ class Model {
      */
     public function get_pilots($select = '*', $items = false, $condition = false){ 
         $custom = false;
-        if($condition === false && $items !== false){ $custom = $items[0] . ' = ' . $items[1]; }
+        $data = $items;
+        if($condition === false && $items !== false){ $custom = $items[0] . ' = ' . $items[1]; $data = array($items[0] => $items[1]); }
         $items = array(
           'tablename' => 'pilots',
           'select' => $select,
           'condition' => $condition,
           'custom' => $custom,
-          'items' => $items
+          'items' => $data
         );
         $res = $this->get_all($items);
         return $res;   
@@ -107,16 +108,17 @@ class Model {
      */
     public function get_aircrafts($select = '*', $items = false, $condition = false){ 
        $custom = false;
-        if($condition === false && $items !== false){ $custom = $items[0] . ' = ' . $items[1]; }
+        $data = $items;
+        if($condition === false && $items !== false){ $custom = $items[0] . ' = ' . $items[1]; $data = array($items[0] => $items[1]); }
         $items = array(
-          'tablename' => 'pilots',
+          'tablename' => 'aircrafts',
           'select' => $select,
           'condition' => $condition,
           'custom' => $custom,
-          'items' => $items
+          'items' => $data
         );
         $res = $this->get_all($items);
-        return $res;   
+        return $res;    
     }
     
     /**
@@ -147,16 +149,17 @@ class Model {
      */
     public function get_flights($select = '*', $items = false, $condition = false){ 
         $custom = false;
-        if($condition === false && $items !== false){ $custom = $items[0] . ' = ' . $items[1]; }
+        $data = $items;
+        if($condition === false && $items !== false){ $custom = $items[0] . ' = ' . $items[1]; $data = array($items[0] => $items[1]); }
         $items = array(
-          'tablename' => 'pilots',
+          'tablename' => 'flight_log',
           'select' => $select,
           'condition' => $condition,
           'custom' => $custom,
-          'items' => $items
+          'items' => $data
         );
         $res = $this->get_all($items);
-        return $res;    
+        return $res;   
     }
     
     /**
@@ -187,16 +190,17 @@ class Model {
      */
     public function get_usergroups($select = '*', $items = false, $condition = false){ 
         $custom = false;
-        if($condition === false && $items !== false){ $custom = $items[0] . ' = ' . $items[1]; }
+        $data = $items;
+        if($condition === false && $items !== false){ $custom = $items[0] . ' = ' . $items[1]; $data = array($items[0] => $items[1]); }
         $items = array(
-          'tablename' => 'pilots',
+          'tablename' => 'usergroups',
           'select' => $select,
           'condition' => $condition,
           'custom' => $custom,
-          'items' => $items
+          'items' => $data
         );
         $res = $this->get_all($items);
-        return $res;     
+        return $res;   
     }
     
     /**
@@ -226,16 +230,17 @@ class Model {
      */
     public function get_trainings($select = '*', $items = false, $condition = false){ 
         $custom = false;
-        if($condition === false && $items !== false){ $custom = $items[0] . ' = ' . $items[1]; }
+        $data = $items;
+        if($condition === false && $items !== false){ $custom = $items[0] . ' = ' . $items[1]; $data = array($items[0] => $items[1]); }
         $items = array(
-          'tablename' => 'pilots',
+          'tablename' => 'trainings',
           'select' => $select,
           'condition' => $condition,
           'custom' => $custom,
-          'items' => $items
+          'items' => $data
         );
         $res = $this->get_all($items);
-        return $res;   
+        return $res;     
     }
     
     /**
@@ -310,7 +315,8 @@ class Model {
      * @return array Returns the result of the query
      */    
     public function get_all($items){
-        if(isset($items['items'])){
+        $upd = array();
+        if(isset($items['items']) && $items['items'] !== false){
             foreach ($items['items'] as $key => $value){ 
                 $upd[':'.$key] = $value;
             }

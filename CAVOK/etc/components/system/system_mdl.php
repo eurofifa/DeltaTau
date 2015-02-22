@@ -25,7 +25,7 @@ class system_Model extends Model {
      */
     public function list_users($ID = false){ 
         $users = $this->get_users($ID);
-        $result = mCore::tableIzer($users, array(array(0,1,2,3,4,5),false,'class="dyntable table table-bordered"'));
+        $result = mCore::tableIzer($users, array(array(0,1,2,3,4,5),false,'class="table table-nomargin dataTable dataTable-tools dataTable-column_filter table-bordered" data-column_filter_types=""'));
         return $result;  
     }
     
@@ -40,7 +40,7 @@ class system_Model extends Model {
      * List all aircrafts users
      */
     public function list_aircrafts($ID = false){ 
-        $users = $this->get_aircrafts($ID);
+        $users = $this->get_aircrafts();
         $result = mCore::tableIzer($users, array(array(0,1,2,3,4,5),false,'class="dyntable table table-bordered"'));
         return $result;  
     }
@@ -49,8 +49,12 @@ class system_Model extends Model {
      * List all registered pilots
      */
     public function list_pilots($ID = false){ 
-        $users = $this->get_pilots($ID);
-        $result = mCore::tableIzer($users, array(array(0,1,2,3,4,5),false,'class="dyntable table table-bordered"'));
+        if($ID){ 
+            $users = $this->get_pilots('*', array('ID', $ID), false);
+        }else{
+            $users = $this->get_pilots();
+        }
+        $result = mCore::tableIzer($users, array(array(1,2,3,4,5),array('Name', 'Licence', 'Phone', 'Place', 'DoB'),'class="table table-nomargin dataTable dataTable-tools dataTable-column_filter table-bordered"'));
         return $result;  
     }
     
@@ -58,7 +62,7 @@ class system_Model extends Model {
      * List all flights logged
      */
     public function list_flights($ID = false){ 
-        $users = $this->get_flights($ID);
+        $users = $this->get_flights();
         $result = mCore::tableIzer($users, array(array(0,1,2,3,4,5),false,'class="dyntable table table-bordered"'));
         return $result;  
     }
@@ -67,7 +71,7 @@ class system_Model extends Model {
      * List all user groups
      */
     public function list_usergroups($ID = false){ 
-        $users = $this->get_usergroups($ID);
+        $users = $this->get_usergroups();
         $result = mCore::tableIzer($users, array(array(0,1,2,3,4,5),false,'class="dyntable table table-bordered"'));
         return $result;  
     }
@@ -76,7 +80,7 @@ class system_Model extends Model {
      * List all trainings
      */
     public function list_trainings($ID = false){ 
-        $users = $this->get_trainings($ID);
+        $users = $this->get_trainings();
         $result = mCore::tableIzer($users, array(array(0,1,2,3,4,5),false,'class="dyntable table table-bordered"'));
         return $result;  
     }

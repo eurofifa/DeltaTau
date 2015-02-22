@@ -24,6 +24,13 @@ class system extends Controller {
      */
     function users(){ 
         
+        $this->view->setPlaces(array(
+        'title' => 'Sytsem',
+        'subtitle' => 'User List',
+        'breadcrumb' => 'User List',
+        'logo' => 'iconfa-pencil'
+        ));
+        
         $set =$this->model->list_users();
         $this->view->__set('res' , $set);
         
