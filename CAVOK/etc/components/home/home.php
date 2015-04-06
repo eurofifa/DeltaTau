@@ -10,7 +10,10 @@ class home extends Controller {
         $this->view->setPlaces(array(
         'title' => 'Welcome',
         'subtitle' => 'CAVOK Online Journey Log',
-        'breadcrumb' => 'Home Page',
+        'breadcrumb' => array(
+            'Home Page' => '/',
+            'Pilot' => '/pilot/',
+            'Edit' => '/pilot/edit'),
         'logo' => 'iconfa-pencil'
         ));
         $this->view->render();

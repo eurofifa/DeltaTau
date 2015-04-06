@@ -3,3 +3,7 @@
     Author     : Magor
 */
 #navigation #brand { background-size: 40% !important; padding-left: 70px !important; padding-bottom: 5px; }
+.chosen-container { width: 100% !important; }
+.mg-form-elem { width: 100% !important; }
+.icao-mask { text-transform: uppercase; }
+.dual-dt { margin-left: 30px !important; margin-top: 10px !important; margin-right: 15px !important; }

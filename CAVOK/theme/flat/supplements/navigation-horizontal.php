@@ -8,19 +8,19 @@
         </div>
         <ul class="subnav-menu">
             <li>
-                <a href="#">Schedules</a>
+                <a href="/schedules/">Schedules</a>
             </li>
             <li>
-                <a href="#">My Flights</a>
+                <a href="/flights/myflights/">My Flights</a>
             </li>
             <li>
-                <a href="#">Personal Info</a>
+                <a href="/pilot/">Personal Info</a>
             </li>
             <li>
-                <a href="#">Report Malfunction</a>
+                <a href="/reports/maintenance/">Report Malfunction</a>
             </li>
             <li>
-                <a href="#">Safety Report</a>
+                <a href="/reports/safety/">Safety Report</a>
             </li>
         </ul>
     </div>
@@ -114,6 +114,9 @@
                     </li>
                 </ul>
             </li>
+            <li>
+                <a href="/flights/binnedflights/">Removed Flights</a>
+            </li>    
             <li>
                 <a href="#">Flight Requests</a>
             </li>

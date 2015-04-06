@@ -9,7 +9,7 @@
  * This project utilizes very basic OOP programing methods to render simple forms for small and quick projects.
  * 
  */
-class ACL  {
+class ACL implements acl_intr  {
 
     public static $acl;
     protected static $controller;
@@ -144,6 +144,14 @@ class ACL  {
         if(!$controller){ $controller = self::$controller; }
         if(!$usergroup){ $usergroup = self::$usergroup; }
         return self::check(array('usergroup' => $usergroup, 'rights' => array($controller)));   
+    }
+    
+    public static function renderRMK($origin, $action){ 
+        $rmk = $origin . PHP_EOL;
+        $date = mCore::renderDate(true);
+        $rmk .= '// ' . $action . ' :' . Session::get('uName') . ' /' . Session::get('uID') . ' /' . $date[0] . ' /' . $date[1] . ' /' . $date[2];
+        $rmk .= PHP_EOL . '<<=';
+        return $rmk;   
     }
 
 }

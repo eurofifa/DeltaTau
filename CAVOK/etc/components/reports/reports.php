@@ -15,6 +15,37 @@ class reports extends Controller {
         ));
         $this->view->render();
     }
-
+    
+    function opsreport(){ 
+        
+        
+    }
+    
+    function safety(){ 
+        
+    }
+    
+    function maintenance(){ 
+        
+        
+    }
+    
+    function requestflight(){ 
+        
+        
+    }
+    
+    function openticket(){ 
+        if(!ACL::is_extended('reports')){ 
+            mCore::redirect_default();
+            exit;
+        }
+      
+    }
+    
+ 
+    
+    
+    
 }
 

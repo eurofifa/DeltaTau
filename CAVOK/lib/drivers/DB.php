@@ -9,7 +9,7 @@
  * This project utilizes very basic OOP programing methods to render simple forms for small and quick projects.
  * 
  */
-class DB  {
+class DB implements db_intr  {
 
     private static $db;
     
@@ -42,7 +42,6 @@ class DB  {
         }
 
         $db = self::_connectDB();
-
         $sth = $db->prepare((string)$query);
         $sth->execute($items['items']);
         $res = $sth->fetchAll(PDO::FETCH_ASSOC);
@@ -72,7 +71,7 @@ class DB  {
     */
     public static function update($items, $write = false, $update = false){ 
         $write = isset($items['write']) ? $items['write'] : $write;
-        if(DB::_checkItemExists($items) > 0 && $write == false){ 
+        if(DB::_checkItemExists($items) > 0 && $write == false && $update == false){ 
             $query = DB::_updateTable($items);
         }elseif($update == true){ $query = DB::_updateTable($items);
         }else{ 
@@ -80,7 +79,48 @@ class DB  {
         }
         $db = self::_connectDB();
         $sth = $db->prepare((string)$query);
+
         $sth->execute($items['items']);
+    }
+    
+    /**
+     * Move Records from One Table to Another
+     * @param array $tables Simple array where #0 = table_form and #1 = table_to
+     * @param string $condition Provide simple condition for WHERE clause
+     * @param bool $delete If set FALSE, record won't be deleted from old_table
+     * @example  DB::move_one(array('table_from', 'table_to'), 'ID = 8');
+     */
+    public static function move_one($tables, $condition, $delete = true){ 
+        $query = "INSERT INTO " . (string)$tables[1] . " SELECT * FROM " . (string)$tables[0] . " WHERE " . (string)$condition;
+        $db = self::_connectDB();
+        $sth = $db->prepare((string)$query);
+        $sth->execute();
+        self::delete_one($tables[0], $condition);
+    }
+    
+    /**
+     * Delete Record from Table
+     * @param string $table
+     * @param string $condition
+     * @example  DB::delete_one('table1', 'ID = 8');
+     */
+    public static function delete_one($table, $condition){ 
+        $query = "DELETE FROM " . (string)$table . " WHERE " . (string)$condition;
+        $db = self::_connectDB();
+        $sth = $db->prepare((string)$query);
+        $sth->execute();
+    }
+
+    /**
+     * Assemble Query Clause for CONDITIONS
+     * @param array $array assoc
+     * @return string
+     */  
+    public static function _assembleClause($array){ 
+        foreach ($array as $key => $value){ 
+            $res = $key . ' = ' . $value;
+        }
+        return $res;
     }
     
     /**
@@ -92,11 +132,13 @@ class DB  {
         $query = "SELECT EXISTS(SELECT 1 FROM ".$items['tablename']." WHERE ";
         foreach ($items['items'] as $key => $value){  
                 $pre = str_replace(':', '', $key);
-                $query .= $pre . " = " . $key;
+                $query .= '`'.$pre . "` = " . $key;
                 if(!self::_lastKey($items['items'], $key)){ $query .= " and ";  }else{ $query .= ")"; }
         }
          $sth = self::executeQuery((string)$query, $items['items']);
-         foreach ($sth[0] as $key => $value){ return (int)$value; }
+         if($sth){
+            foreach ($sth[0] as $key => $value){ return (int)$value; }
+         }else{ return 0; }
     }
     
    /**
@@ -126,14 +168,16 @@ class DB  {
         $query = "UPDATE " . $items['tablename'] . " SET ";
         foreach ($items['items'] as $key => $value) {
             $pre = str_replace(':', '', $key);
-            $query .= $pre . " = " . $key;
+            $query .= '`' . $pre . "` = " . $key;
             if (!DB::_lastKey($items['items'], $key)) {
                 $query .= ", ";
             }
         }
         if (isset($items['condition'])) { $query .= " WHERE "; }
         if (isset($items['custom']) && $items['custom'] !== false) { $query .= $items['custom'];}
+
         return (string)$query;
+        
     }
     
     /**

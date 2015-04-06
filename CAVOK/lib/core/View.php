@@ -26,7 +26,7 @@ class View {
         $res = $this->_req;
         if(!$name){ $name = $this->_locateTemplate(mCore::get_calling_class(), mCore::get_calling_method());  }
         if($wrap == true){
-            $this->_renderHeader();
+            $this->_renderHeader($name);
             require VIW_PATH.'header.php';
             require_once APP_PATH.$name.'.php';
             require VIW_PATH.'footer.php';
@@ -53,7 +53,7 @@ class View {
      * Renders HTML Header for OUTPUT
      * @return string
      */
-    private function _renderHeader(){  
+    private function _renderHeader($name){  
         $result = "<!DOCTYPE html>\n<html>\n<head>\n";
         $result .= mCore::get_rendered(THEME_PATH.'supplements/head.php');
         $result .= mCore::get_rendered(THEME_PATH.'supplements/metas.php');
@@ -61,6 +61,9 @@ class View {
         $result .= mCore::get_rendered(THEME_PATH.'supplements/scripts.php');
         print $result;        
         print $this->_setTitle();
+        //custom ovverrides (/component/class/view/)
+        print $this->_getStyles($name);
+        print $this->_getJS($name);
         //print $this->_loadStyles();
         //print $this->_loadjQ();
         //print $this->_loadJS();     
@@ -83,6 +86,39 @@ class View {
             $result .= '<title>'.SITE_NAME.'</title>'."\n";
         } 
         return $result;
+    }
+    
+    
+    /**
+     * Load Styles Supplements
+     * @return string
+    */
+    private function _getStyles($name){ 
+        $base = substr($name, 0, strrpos($name, "/"));
+        $file = trim(substr($name, strrpos($name, '/') + 1));
+        $try = mCore::get_rendered(APP_PATH . $base . '/css/' . $file . '.css');
+        if ($try) {
+            $result = '<style>';
+            $result .= $try;
+            $result .= '</style>';
+            return $result;
+        }
+    }
+    
+    /**
+     * Load JavaScript Supplements
+     * @return string
+    */
+    private function _getJS($name){ 
+        $base = substr($name, 0, strrpos($name, "/"));
+        $file = trim(substr($name, strrpos($name, '/') + 1));
+        $try = mCore::get_rendered(APP_PATH . $base . '/js/' . $file . '.js');
+        if ($try) {
+            $result = '<script>';
+            $result .= $try;
+            $result .= '</script>';
+            return $result;
+        }
     }
     
     /**

@@ -6,12 +6,12 @@
         </a>
         <ul class='main-nav'>
             <li>
-                <a href="index.html">
+                <a href="/log/">
                     <span>My Flights</span>
                 </a>
             </li>
             <li>
-                <a href="index.html">
+                <a href="/pilot/">
                     <span>Personal Info</span>
                 </a>
             </li>

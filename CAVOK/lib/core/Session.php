@@ -25,6 +25,12 @@ class Session {
         }          
     }
     
+    public static function un_set($key){ 
+        if(isset($_SESSION[$key])){ 
+            unset($_SESSION[$key]);
+        }
+    }
+
     public static function is_logged(){ 
         if(self::get('lIN')){ return true; }
         return false;

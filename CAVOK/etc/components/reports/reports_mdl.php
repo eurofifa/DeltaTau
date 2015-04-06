@@ -9,5 +9,20 @@ class reports_Model extends Model {
     public function msg(){  
         return 'Model Initialized.';
     }
+    
+    public function report($task){ 
+        
+        
+        
+        
+    }
+    
+    public function requestflight($arg){ 
+        
+        
+        
+    }
+    
+    
 }
 

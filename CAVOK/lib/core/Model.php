@@ -9,7 +9,7 @@
  * This project utilizes very basic OOP programing methods to render simple forms for small and quick projects.
  * 
  */
-class Model {
+class Model implements model_intr {
 
     function __construct() {
         global $state;
@@ -32,7 +32,7 @@ class Model {
         $condition = false;
         if(isset($ID) && $ID !== false){ $items = array(':ID' => $ID); $condition = 'and'; }
         if($PID){ $items = array(':PID' => $PID); $condition = 'and'; }
-        $res = DB::get_one(array('tablename' => 'users','select' => '*','condition' => $condition,'custom' => false,'items' => array(':ID' => $ID)));
+        $res = DB::get_one(array('tablename' => 'users','select' => '*','condition' => $condition,'custom' => false,'items' => $items));
         return $res;
     }
     
@@ -98,6 +98,77 @@ class Model {
        
     }
     
+    /**
+     * Generates Dropdown Options for Forms (Pilots only)
+     * @param array $extra
+     * @return string
+     * @note provide array for extra options at the end!
+     */
+    public function generate_pilot_dropdown($selected = false, $extra = false){ 
+        $pilots = $this->get_pilots();
+        $dropdown = null;
+        $sel = null;
+        foreach ($pilots as $row => $pilot){ 
+             if($selected == $pilot['ID'] ){ $sel = 'selected'; $match = true; }else{ $sel = null; }
+            $dropdown .= '<option value="' . $pilot['ID'] . '" '.$sel.'>' . $pilot['NAME'] . '</option>';
+        }
+        if(!isset($match)){ $dropdown .= '<option value="0" selected>none</option>'; }
+        if($extra){ 
+            foreach ($extra as $key => $value){ 
+                $dropdown .= '<option value="' . $value . '">' . $key . '</option>';
+            }
+        }
+        return $dropdown;
+    }
+    
+    /**
+     * Generates Dropdown Options for Forms (Pilots only)
+     * @param array $extra
+     * @return string
+     * @note provide array for extra options at the end!
+     */
+    public function generate_aircraft_dropdown($selected = false, $extra = false){ 
+        $aircrafts = $this->get_aircrafts();
+        $dropdown = null;
+        $sel = null;
+        foreach ($aircrafts as $row => $ac){ 
+             if($selected == $ac['ID'] ){ $sel = 'selected'; $match = true; }else{ $sel = null; }
+            $dropdown .= '<option value="' . $ac['ID'] . '" '.$sel.'>' . $ac['callsign'] . '</option>';
+        }
+        if(!isset($match)){ $dropdown .= '<option value="0" selected>none</option>'; }
+        if($extra){ 
+            foreach ($extra as $key => $value){ 
+                $dropdown .= '<option value="' . $value . '">' . $key . '</option>';
+            }
+        }
+        return $dropdown;
+    }
+    
+    
+    /**
+     * Generates Dropdown Options for Forms (Pilots only)
+     * @param array $extra
+     * @return string
+     * @note provide array for extra options at the end!
+     */
+    public function generate_ops_dropdown($selected = false, $extra = false){ 
+        $ops = $this->get_ops();
+        $dropdown = null;
+        $sel = null;
+        foreach ($ops as $row => $op){ 
+             if($selected == $op['abbr'] ){ $sel = 'selected'; $match = true; }else{ $sel = null; }
+            $dropdown .= '<option value="' . $op['abbr'] . '" '.$sel.'>' . $op['abbr'] . '</option>';
+        }
+        if(!isset($match)){ $dropdown .= '<option value="Other" selected>Other</option>'; }
+        if($extra){ 
+            foreach ($extra as $key => $value){ 
+                $dropdown .= '<option value="' . $value . '">' . $key . '</option>';
+            }
+        }
+        return $dropdown;
+    }
+    
+    
     
     /**
      * Get all or selected aircrafts from database
@@ -120,6 +191,47 @@ class Model {
         $res = $this->get_all($items);
         return $res;    
     }
+    
+    /**
+     * Get all or selected Operation Type from the operations table
+     * @param int $select fields to be selected
+     * @param bool $condition condition for the query
+     * @param bool $items fields to filter
+     * @return array assoc
+     */
+    public function get_ops($select = '*', $items = false, $condition = false){ 
+       $custom = false;
+        $data = $items;
+        if($condition === false && $items !== false){ $custom = $items[0] . ' = ' . $items[1]; $data = array($items[0] => $items[1]); }
+        $items = array(
+          'tablename' => 'operations',
+          'select' => $select,
+          'condition' => $condition,
+          'custom' => $custom,
+          'items' => $data
+        );
+        $res = $this->get_all($items);
+        return $res;    
+    }
+    
+    /**
+     * Record Operation Type
+     * @param array $arg User data to be recorded
+     * @param array $update User data to be updated
+     * @example $items = array('username' => 'Joe', 'password' => '1234');
+     * @example $update | True for force update
+     */
+    public function rec_ops($items, $udpate = false){  
+        $items['items'] = $items;
+        $items['tablename'] = 'operations';
+        if($update){ 
+            $this->upd_all($items);
+        }else{ 
+            $this->rec_all($items);
+        }
+       
+    }
+    
     
     /**
      * Record aircrafts
@@ -148,7 +260,7 @@ class Model {
      * @return array assoc
      */
     public function get_flights($select = '*', $items = false, $condition = false){ 
-        $custom = false;
+        $custom = isset($items['custom']) ? $items['custom'] : false;
         $data = $items;
         if($condition === false && $items !== false){ $custom = $items[0] . ' = ' . $items[1]; $data = array($items[0] => $items[1]); }
         $items = array(
@@ -163,15 +275,40 @@ class Model {
     }
     
     /**
+     * Get all or selected binned flights from database bin
+     * @param int $select fields to be selected
+     * @param bool $condition condition for the query
+     * @param bool $items fields to filter
+     * @return array assoc
+     */
+    public function get_binned_flights($select = '*', $items = false, $condition = false){ 
+        $custom = isset($items['custom']) ? $items['custom'] : false;
+        $data = $items;
+        if($condition === false && $items !== false){ $custom = $items[0] . ' = ' . $items[1]; $data = array($items[0] => $items[1]); }
+        $items = array(
+          'tablename' => 'flight_log_bin',
+          'select' => $select,
+          'condition' => $condition,
+          'custom' => $custom,
+          'items' => $data
+        );
+        $res = $this->get_all($items);
+        return $res;   
+    }
+    
+    
+    /**
      * Record flights
      * @param array $arg User data to be recorded
      * @param array $update User data to be updated
      * @example $items = array('username' => 'Joe', 'password' => '1234');
      * @example $update | True for force update
+     * @example $check = array('ID' => 1);
      */
-    public function rec_flights($items, $udpate = false){  
+    public function rec_flights($items, $update = false, $check = false){  
         $items['items'] = $items;
         $items['tablename'] = 'flight_log';
+        $items['condition'] = DB::_assembleClause($check);
         if($update){ 
             $this->upd_all($items);
         }else{ 
@@ -210,7 +347,7 @@ class Model {
      * @example $items = array('username' => 'Joe', 'password' => '1234');
      * @example $update | True for force update
      */
-    public function rec_usergroups($items, $udpate = false){  
+    public function rec_usergroups($items, $update = false){  
         $items['items'] = $items;
         $items['tablename'] = 'usergroups';
         if($update){ 
@@ -250,7 +387,7 @@ class Model {
      * @example $items = array('username' => 'Joe', 'password' => '1234');
      * @example $update | True for force update
      */
-    public function rec_trainings($items, $udpate = false){  
+    public function rec_trainings($items, $update = false){  
         $items['items'] = $items;
         $items['tablename'] = 'trainings';
         if($update){ 
@@ -297,7 +434,7 @@ class Model {
         foreach ($items['items'] as $key => $value){ 
             $upd[':'.$key] = $value;
         }
-        $data = array('tablename' => $items['tablename'], 'write' => $write, 'items' => $upd);
+        $data = array('tablename' => $items['tablename'], 'write' => $write, 'items' => $upd, 'condition' => true, 'custom' => $items['condition']);
         DB::update($data, $write, true); 
     }
     
@@ -332,7 +469,6 @@ class Model {
         $res = DB::get_one($data);
         return $res;
     }
-    
     
     
 }

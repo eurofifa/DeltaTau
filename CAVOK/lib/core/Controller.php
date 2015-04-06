@@ -9,7 +9,7 @@
  * This project utilizes very basic OOP programing methods to render simple forms for small and quick projects.
  * 
  */
-class Controller {
+class Controller implements controller_intr {
     
     function __construct() {
         $this->view = new View();

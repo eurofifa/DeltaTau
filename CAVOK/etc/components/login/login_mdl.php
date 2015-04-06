@@ -72,6 +72,7 @@ class login_Model extends Model {
         Session::set('PID' , $user['PID']);
         Session::set('uName' , $pilot['NAME']);
         Session::set('uMail' , $pilot['email']);
+        Session::set('user', $user['username']);
     }
   
 }

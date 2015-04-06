@@ -1,9 +1,9 @@
 <?php
 /**
- * Log-A-Flight
+ * Pilot Profile
  * @author MagoR
- * @version 0.1
- * Controller class for flight record keeping.
+ * @version 0.6
+ * Controller class for Pilot records, personal information, flights and more.
 */
 class pilot extends Controller {
 
@@ -11,39 +11,45 @@ class pilot extends Controller {
         parent::__construct();
     }
     
-    function index(){ 
+    function index($pid = false){ 
         $this->view->setPlaces(array(
         'title' => 'Pilot Records',
         'subtitle' => 'Pilot Information',
-        'breadcrumb' => 'Pilot Records',
+        'breadcrumb' => array(
+            'Pilot' => '/' . $pid,
+            'Personal Info' => '/pilot/' . $pid,
+            'Edit Records' => '/pilot/edit/' . $pid),
         'logo' => 'iconfa-pencil'
         ));
-        
-        $set =$this->model->get_pilot();
+        $set =$this->model->pilot_profile($pid);
         $this->view->__set('pilot' , $set);
-        
         $this->view->render('pilot/view/pilot');
     }
     
-    function edit(){ 
+    function edit($pid = false){ 
+        if(isset($_POST)){ 
+            $this->_updateProfile($_POST);
+        }
         $this->view->setPlaces(array(
         'title' => 'Edit Pilot Records',
         'subtitle' => 'Edit Pilot Information',
-        'breadcrumb' => 'Edit Pilot Records',
+        'breadcrumb' => array(
+            'Pilot' => '/pilot/',
+            'Personal Info' => '/pilot/' . $pid,
+            'Edit Records' => '/pilot/edit/' . $pid),
         'logo' => 'iconfa-pencil'
         ));
-        
-        $set =$this->model->pilot_profile();
+        $set =$this->model->pilot_profile($pid);
         $this->view->__set('pilot' , $set);
-        
         $this->view->render('pilot/view/edit.pilot');
     }
-    
-    function flights(){ 
+
+    function pw(){ 
         
     }
     
-    function pw(){ 
+    private function _updateProfile($data){ 
+        
         
     }
     

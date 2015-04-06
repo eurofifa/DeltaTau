@@ -53,6 +53,31 @@ class system extends Controller {
         
     }
     
+    function manageuser(){ 
+        
+        
+    }
+    
+    function usergroups(){ 
+        
+        
+    }
+    
+    function managegroups(){ 
+        
+        
+        
+    }
+    
+    function openticket(){ 
+        /*refer to reports component*/
+        header('Location: ' . HTTP_PATH . '/reports/openticket/');
+        exit;
+    }
+    
+    
+    
+    
     function rec(){  
         $this->model->rec_user();
         $this->view->render('home/view/home');

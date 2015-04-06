@@ -9,5 +9,13 @@ class log_Model extends Model {
     public function msg(){  
         return 'Model Initialized.';
     }
+    
+    public function log_a_flight($data){ 
+        
+        
+        
+    }
+    
+    
 }
 

@@ -15,5 +15,6 @@ class log extends Controller {
         $this->view->render(false,false);
     }
     
+    
 }
 

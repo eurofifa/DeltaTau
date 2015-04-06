@@ -24,6 +24,13 @@ class BootStrap {
             $this->_loadDefaultController();
             return false;
         }
+        
+        /**
+         * STRIP BASE URL
+         * REFER TO CONFIG
+         */
+        if(HT_OVR){ $this->_stripDIR(); }
+        
         $this->_loadExistingController($this->_url[0]);
         $this->_callControllerMethod();
       }
@@ -107,4 +114,18 @@ class BootStrap {
         $this->_url = explode('/', $url);
      }
     
+     /*
+      * Auto-strip HTTP_DIR when set
+      */
+     private function _stripDIR(){ 
+         $url = $this->_url;
+         if($url[0] == HTTP_DIR){
+             unset($url[0]);
+             $url = array_values($url);
+             unset($this->_url);
+             $this->_url = $url;
+         }
+     }
+     
+     
 }

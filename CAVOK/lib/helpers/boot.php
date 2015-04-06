@@ -2,7 +2,7 @@
 /**
  * DeltaTau Project | Boot
  * @author Gabor B Magyari
- * @version 0.4.0
+ * @version 0.6.0
  * 
  * @package DeltaTau Project
  * 
@@ -13,6 +13,7 @@ class boot {
 
     function __construct() {
         $this->_setState();
+        $this->_load_Interfaces();
         $this->_autoLoad();
         $this->_load_mCore();
         $this->_load_Drivers();
@@ -63,6 +64,17 @@ class boot {
         }
     }
     
+    /**
+     * Loads Interfaces
+     * @author MagoR
+     * @note auto load all Interfaces
+     */
+    private function _load_Interfaces(){ 
+        foreach (glob(LIB_PATH."interfaces/*.php") as $filename){
+            include $filename;
+        }
+    }
+        
    /**
      * Loads Drivers
      * @author MagoR

@@ -4,8 +4,10 @@
             <div class="pull-left">
                 <h1><?php echo $res['places']['subtitle']; ?></h1>
             </div>
-            <div class="pull-right">
+            <div class="pull-right"> 
+                <!--
                 <ul class="minitiles">
+                    <!--
                     <li class='grey'>
                         <a href="#">
                             <i class="fa fa-cogs"></i>
@@ -16,20 +18,20 @@
                             <i class="fa fa-globe"></i>
                         </a>
                     </li>
-                </ul>
-                <ul class="stats">
-                    <li class='satgreen'>
+                </ul> -->
+              <ul class="stats">
+                      <!-- <li class='satgreen'>
+                           
                         <i class="fa fa-money"></i>
                         <div class="details">
-                            <span class="big">$324,12</span>
+                            <span class="big"></span>
                             <span>Balance</span>
                         </div>
-                    </li>
+                    </li> -->
                     <li class='lightred'>
                         <i class="fa fa-calendar"></i>
                         <div class="details">
-                            <span class="big">February 22, 2013</span>
-                            <span>Wednesday, 13:56</span>
+                            <?php mCore::renderDate(); ?>
                         </div>
                     </li>
                 </ul>
@@ -37,17 +39,7 @@
         </div>
         <div class="breadcrumbs">
             <ul>
-                <li>
-                    <a href="more-login.html">Home</a>
-                    <i class="fa fa-angle-right"></i>
-                </li>
-                <li>
-                    <a href="more-files.html">Pages</a>
-                    <i class="fa fa-angle-right"></i>
-                </li>
-                <li>
-                    <a href="more-blank.html">Blank page</a>
-                </li>
+                <?php mCore::generateBreadcrumbs($res['places']['breadcrumb']); ?>
             </ul>
             <div class="close-bread">
                 <a href="#">
